@@ -184,7 +184,13 @@ Expand on your plot from the previous step to make the size of your points based
 ```{r}
 #| label: plot-aes-size
 
-# add code here
+ggplot(bechdel, aes(x = budget_2013, y = gross_2013, colour = binary, size = roi)) +
+  geom_point() + 
+  labs(
+    x = "Budget (in 2013 $)", 
+    y = "Gross revenue (in 2013 $)", 
+    title = "Gross revenue vs. budget, by Bechdel test result"
+  )
 ```
 
 ### Step 5 - Your turn
@@ -194,7 +200,13 @@ Expand on your plot from the previous step to make the transparency (`alpha`) of
 ```{r}
 #| label: plot-aes-alpha
 
-# add code here
+ggplot(bechdel, aes(x = budget_2013, y = gross_2013, colour = binary, size = roi, alpha = 0.5)) +
+  geom_point() + 
+  labs(
+    x = "Budget (in 2013 $)", 
+    y = "Gross revenue (in 2013 $)", 
+    title = "Gross revenue vs. budget, by Bechdel test result"
+  )
 ```
 
 ### Step 6 - Your turn
