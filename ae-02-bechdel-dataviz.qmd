@@ -29,7 +29,7 @@ Let's read it from there and save it as an object called `bechdel`.
 #| label: read-data
 #| message: false
 
-bechdel <- read_csv("https://sta199-s24.github.io/data/bechdel.csv")
+bechdel <- read_csv("data/bechdel.csv")
 ```
 
 ### Get to know the data
@@ -39,20 +39,23 @@ We can use the `glimpse` function to get an overview (or "glimpse") of the data.
 ```{r}
 #| label: glimpse
 
-# add code here
+glimpse(bechdel)
+
+bechdel %>%
+  glimpse()
 ```
 
 -   What does each observation (row) in the data set represent?
 
-Each observation represents a **\_\_\_**.
+Each observation represents a **movie**.
 
 -   How many observations (rows) are in the data set?
 
-There are `r nrow(bechdel)` movies in the dataset.
+There are `{r}nrow(bechdel)` movies in the dataset.
 
 -   How many variables (columns) are in the data set?
 
-There are `___` columns in the dataset.
+There are `{r}ncol(bechdel)` columns in the dataset.
 
 ### Variables of interest
 
@@ -216,7 +219,14 @@ Expand on your plot from the previous step by using `facet_wrap` to display the 
 ```{r}
 #| label: plot-facet-wrap
 
-# add code here
+ggplot(bechdel, aes(x = budget_2013, y = gross_2013, colour = binary, size = roi, alpha = 0.5)) +
+  geom_point() + 
+  facet_wrap(~clean_test) +
+  labs(
+    x = "Budget (in 2013 $)", 
+    y = "Gross revenue (in 2013 $)", 
+    title = "Gross revenue vs. budget, by Bechdel test result"
+  )
 ```
 
 ### Step 7 - Demo
@@ -230,7 +240,16 @@ Make use of the [**scales**](https://scales.r-lib.org/) package, specifically th
 ```{r}
 #| label: plot-scales
 
-# add code here
+ggplot(bechdel, aes(x = budget_2013, y = gross_2013, colour = binary, size = roi, alpha = 0.5)) +
+  geom_point() + 
+  facet_wrap(~clean_test) +
+  labs(
+    x = "Budget (in million 2013 $)", 
+    y = "Gross revenue (in million 2013 $)", 
+    title = "Gross revenue vs. budget, by Bechdel test result"
+  ) +
+  scale_x_continuous(label = label_number(scale = 1/1000000)) +
+  scale_y_continuous(label = label_number(scale = 1/1000000))
 ```
 
 ### Step 8 - Your turn
@@ -241,10 +260,19 @@ Comment on whether this was a useful update.
 ```{r}
 #| label: plot-facet-grid
 
-# add code here
+ggplot(bechdel, aes(x = budget_2013, y = gross_2013, colour = binary, size = roi, alpha = 0.5)) +
+  geom_point() + 
+  facet_grid(clean_test~binary) +
+  labs(
+    x = "Budget (in million 2013 $)", 
+    y = "Gross revenue (in million 2013 $)", 
+    title = "Gross revenue vs. budget, by Bechdel test result"
+  ) +
+  scale_x_continuous(label = label_number(scale = 1/1000000)) +
+  scale_y_continuous(label = label_number(scale = 1/1000000))
 ```
 
-Add comment here...
+This does not seem useful, as the colours already made the pass/fail easy to visualize. This is now much more condensed and difficult to read.
 
 ### Step 9 - Demo
 
@@ -253,7 +281,21 @@ What other improvements could we make to this plot?
 ```{r}
 #| label: plot-improve
 
-# add code here
+ggplot(bechdel, aes(x = budget_2013, y = gross_2013, colour = binary, size = roi, alpha = 0.5)) +
+  geom_point() + 
+  facet_wrap(~clean_test) +
+  labs(
+    x = "Budget/n (in million 2013 $)", 
+    y = "Gross revenue\n (in million 2013 $)", 
+    title = "Gross revenue vs. budget,\n by Bechdel test result"
+  ) +
+  scale_x_continuous(label = label_number(scale = 1/1000000)) +
+  scale_y_continuous(label = label_number(scale = 1/1000000)) +
+  theme_classic() +
+  theme(
+    panel.background = element_rect(colour = "black")
+  ) +
+  theme(plot.title = element_text(hjust = 0.5))
 ```
 
 ### Render, commit, and push
