@@ -133,7 +133,7 @@ See <http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf> for many color optio
 #| label: plot-point-color
 
 ggplot(bechdel, aes(x = budget_2013, y = gross_2013)) +
-  geom_point(color = "deepskyblue3") 
+  geom_point(color = "#440154FF") 
 ```
 
 ### Step 2 - Your turn
@@ -146,9 +146,9 @@ Add labels for the title and x and y axes.
 ggplot(bechdel, aes(x = budget_2013, y = gross_2013))+
   geom_point(color = "deepskyblue3") + 
   labs(
-    x = "___", 
-    y = "___", 
-    title = "___"
+    x = "Budget (in 2013 $)", 
+    y = "Gross Revenue (in 2013 $)", 
+    title = "Gross Revenue vs. Budget by Bechdel test result"
   )
 ```
 
@@ -168,12 +168,12 @@ Modify the plot below, so the `color` of the points is based on the variable `bi
 ```{r}
 #| label: plot-aes-color
 
-ggplot(bechdel, aes(x = budget_2013, y = gross_2013)) +
+ggplot(bechdel, aes(x = budget_2013, y = gross_2013, colour = binary)) +
   geom_point() + 
   labs(
     x = "Budget (in 2013 $)", 
     y = "Gross revenue (in 2013 $)", 
-    title = "Gross revenue vs. budget, by ___"
+    title = "Gross revenue vs. budget, by Bechdel test result"
   )
 ```
 
